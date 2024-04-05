@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct MoviesResponse: Decodable{
-    let results:[Movie]
-}
+struct Movie: Codable {
+    let Title: String
+    let Year: String
+    let Rated: String
+    let Released: String
+    let Runtime: String
+    let Genre: String
+    let Director: String
 
-struct Movie:Decodable{
-    let id:Int
-    let title:String
-    let overview: String
+    let Poster: String
+
 }
