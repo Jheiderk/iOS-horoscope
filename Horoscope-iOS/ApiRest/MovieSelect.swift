@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+
+struct MoviesSelect: Codable {
+    let Title: String
+    let Year: String
+    let imdbID: String
+    let Poster: String
+
+}

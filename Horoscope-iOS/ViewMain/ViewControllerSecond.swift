@@ -11,56 +11,53 @@ import UIKit
 class ViewControllerSecond: UIViewController {
     
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var posterImageView: UIImageView! // Conexión IBOutlet a tu UIImageView
+    @IBOutlet var posterImageView: UIImageView!
+    var selectedMovieID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         posterImageView.contentMode = .scaleAspectFill
-        
         fetchMovie()
     }
     
     let apiKey = "5a61c33"
     
-    func fetchMovieFromAPI() async throws -> Movie {
-        let url = URL(string: "http://www.omdbapi.com/?i=tt8551028&apikey=\(apiKey)")!
+    func fetchMovieFromAPI(imdbID: String) async throws -> MovieDetails {
+        let url = URL(string: "http://www.omdbapi.com/?i=\(imdbID)&apikey=\(apiKey)")!
         
         let (data, _) = try await URLSession.shared.data(from: url)
         
-        let decoded = try JSONDecoder().decode(Movie.self, from: data)
+        let decoded = try JSONDecoder().decode(MovieDetails.self, from: data)
         
         return decoded
     }
     
     func fetchMovie() {
-        Task {
-            do {
-                let movie = try await fetchMovieFromAPI()
-                
-                // Actualizar la interfaz de usuario en el hilo principal
-                DispatchQueue.main.async {
-                    self.titleLabel.text = movie.Title
-                    // Mostrar el título de la película
-                    
-                    if let posterURL = URL(string: movie.Poster) {
-                        // Cargar la imagen desde la URL
-                        URLSession.shared.dataTask(with: posterURL) { data, response, error in
-                            if let data = data {
-                                // Convertir los datos en una imagen
-                                let image = UIImage(data: data)
-                                
-                                // Actualizar la vista de imagen en el hilo principal
-                                DispatchQueue.main.async {
-                                    self.posterImageView.image = image
-                                }
-                            }
-                        }.resume()
-                    }
-                }
-            } catch {
-                print("Error al obtener la película: \(error)")
-            }
-        }
-    }
+           guard let selectedMovieID = selectedMovieID else {
+               print("No se proporcionó ningún ID de película")
+               return
+           }
+           
+           Task {
+               do {
+                   let movie = try await fetchMovieFromAPI(imdbID: selectedMovieID)
+                   
+                   DispatchQueue.main.async {
+                       self.titleLabel.text = movie.Title
+                       if let posterURL = URL(string: movie.Poster) {
+                           URLSession.shared.dataTask(with: posterURL) { data, response, error in
+                               if let data = data {
+                                   let image = UIImage(data: data)
+                                   DispatchQueue.main.async {
+                                       self.posterImageView.image = image
+                                   }
+                               }
+                           }.resume()
+                       }
+                   }
+               } catch {
+                   print("Error al obtener la película: \(error)")
+               }
+           }
+       }
 }
