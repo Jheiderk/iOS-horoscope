@@ -14,20 +14,7 @@ class ViewHoroscope: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     @IBOutlet weak var tableView: UITableView!
     
-    var horoscope: [String] = [
-        "Aries",
-        "Aquarius",
-        "Pisces",
-        "Taurus",
-        "Gemini",
-        "Cancer",
-        "Leo",
-        "Virgo",
-        "Libra",
-        "Scorpio",
-        "Sagittarius",
-        "Capricorn"
-    ]
+    var horoscope: [Horoscope] = Horoscope.allHoroscopes()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +31,9 @@ class ViewHoroscope: UIViewController, UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HoroscopeCell", for: indexPath) as! HoroscopeCell
         let item = horoscope[indexPath.row]
-        cell.titleHoroscope.text = item // Asigna el texto a la etiqueta del título del horóscopo
-        print(item)
+        cell.titleHoroscope.text = item.name.uppercased() // Asigna el texto a la etiqueta del título del horóscopo
+        cell.imageHoroscope.image=item.image
+        print(item.name)
         return cell
     }
         
@@ -63,7 +51,7 @@ class ViewHoroscope: UIViewController, UITableViewDataSource, UITableViewDelegat
         viewHoroscopeDetails.selectedHoroscope = selectedHoroscope
         
         // Presentar la pantalla de detalle
-        navigationController?.pushViewController(viewHoroscopeDetails, animated: true)
+        present(viewHoroscopeDetails, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
