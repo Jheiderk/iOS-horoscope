@@ -50,16 +50,16 @@ struct Rating: Decodable {
     let Value: String
 }
 
-struct HoroscopeResponse: Codable {
+struct HoroscopeResponse: Decodable {
     let data: HoroscopeData
     let status: Int
     let success: Bool
 }
 
-struct HoroscopeData: Codable {
+struct HoroscopeData: Decodable {
     let date: String
     let horoscopeData: String
-    
+
     enum CodingKeys: String, CodingKey {
         case date
         case horoscopeData = "horoscope_data"
