@@ -86,7 +86,75 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3AR-iU-hbu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2754.9618320610684" y="685.91549295774655"/>
+            <point key="canvasLocation" x="3283" y="4"/>
+        </scene>
+        <!--View Horoscope-->
+        <scene sceneID="EUh-zh-Tmo">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="R1U-Of-tuB" customClass="ViewHoroscope" customModule="Horoscope_iOS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W6w-KD-uB7">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xw0-CM-7cU">
+                                <rect key="frame" x="16" y="103" width="361" height="715"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HoroscopeCell" rowHeight="107" id="H1C-Pb-1Ib" customClass="HoroscopeCell" customModule="Horoscope_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="361" height="107"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H1C-Pb-1Ib" id="BuX-O3-f6a">
+                                            <rect key="frame" x="0.0" y="0.0" width="361" height="107"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQP-p2-to3">
+                                                    <rect key="frame" x="20" y="0.0" width="147" height="107"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpp-0b-0w3">
+                                                    <rect key="frame" x="175" y="0.0" width="186" height="107"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageHoroscope" destination="LQP-p2-to3" id="zU4-yg-gHQ"/>
+                                            <outlet property="titleHoroscope" destination="Mpp-0b-0w3" id="QuL-vN-bGK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="D57-8e-IWb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tDO-cf-OIA"/>
+                    <connections>
+                        <outlet property="tableView" destination="xw0-CM-7cU" id="zcc-Bm-TCj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zUC-oR-vwf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3258.7786259541986" y="769.71830985915494"/>
+        </scene>
+        <!--View Horoscope Details-->
+        <scene sceneID="AA6-Ig-0eR">
+            <objects>
+                <viewController storyboardIdentifier="ViewHoroscopeDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9vq-pE-8ZN" customClass="ViewHoroscopeDetails" customModule="Horoscope_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YMS-u0-Fdj">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Ipp-5L-4SZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uSN-jF-HqW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4375" y="770"/>
         </scene>
         <!--View Controller Second-->
         <scene sceneID="TSO-Cc-htO">
@@ -119,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVe-fb-OUy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4077" y="696"/>
+            <point key="canvasLocation" x="4375" y="4"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="1VG-Fo-cQB">
@@ -130,7 +198,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEB-Cz-GLu">
-                                <rect key="frame" x="84" y="314" width="225" height="87"/>
+                                <rect key="frame" x="84" y="163" width="225" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="IMC Calculator"/>
@@ -139,12 +207,21 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAB-VL-fgv">
-                                <rect key="frame" x="84" y="463" width="225" height="86"/>
+                                <rect key="frame" x="84" y="325" width="225" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Second exercise"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Movie"/>
                                 <connections>
                                     <segue destination="CbZ-pc-6c6" kind="show" id="Pg1-D9-UWF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEI-iQ-QXj">
+                                <rect key="frame" x="84" y="501" width="225" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Horoscope"/>
+                                <connections>
+                                    <segue destination="R1U-Of-tuB" kind="show" id="KtG-Ss-X8x"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -271,7 +348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3348.8549618320608" y="-258.45070422535213"/>
+            <point key="canvasLocation" x="2795" y="-1010"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bxm-fw-JUa">

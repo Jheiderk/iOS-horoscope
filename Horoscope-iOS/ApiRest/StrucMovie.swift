@@ -49,3 +49,19 @@ struct Rating: Decodable {
     let Source: String
     let Value: String
 }
+
+struct HoroscopeResponse: Codable {
+    let data: HoroscopeData
+    let status: Int
+    let success: Bool
+}
+
+struct HoroscopeData: Codable {
+    let date: String
+    let horoscopeData: String
+    
+    enum CodingKeys: String, CodingKey {
+        case date
+        case horoscopeData = "horoscope_data"
+    }
+}
