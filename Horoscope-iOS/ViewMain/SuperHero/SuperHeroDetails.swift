@@ -1,18 +1,18 @@
 //
-//  ViewControllerSecond.swift
+//  SuperHeroDetails.swift
 //  Horoscope-iOS
 //
-//  Created by Mañanas on 5/4/24.
+//  Created by Mañanas on 10/4/24.
 //
 
 import Foundation
 import UIKit
 
-class ViewControllerSecond: UIViewController {
+class SuperHeroDetails: UIViewController {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var posterImageView: UIImageView!
-    var selectedMovieID: String?
+    var hero: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,29 +22,29 @@ class ViewControllerSecond: UIViewController {
     
     let apiKey = "5a61c33"
     
-    func fetchMovieFromAPI(imdbID: String) async throws -> MovieDetails {
-        let url = URL(string: "http://www.omdbapi.com/?i=\(imdbID)&apikey=\(apiKey)")!
+    func fetchMovieFromAPI(idHero: String) async throws -> Hero {
+        let url = URL(string: "https://superheroapi.com/api/7252591128153666/\(idHero)")!
         
         let (data, _) = try await URLSession.shared.data(from: url)
         
-        let decoded = try JSONDecoder().decode(MovieDetails.self, from: data)
+        let decoded = try JSONDecoder().decode(Hero.self, from: data)
         
         return decoded
     }
     
     func fetchMovie() {
-           guard let selectedMovieID = selectedMovieID else {
+           guard let selected = hero else {
                print("No se proporcionó ningún ID de película")
                return
            }
            
            Task {
                do {
-                   let movie = try await fetchMovieFromAPI(imdbID: selectedMovieID)
+                   let movie = try await fetchMovieFromAPI(idHero: selected)
                    
                    DispatchQueue.main.async {
-                       self.titleLabel.text = movie.Title
-                       if let posterURL = URL(string: movie.Poster) {
+                       self.titleLabel.text = movie.name
+                       if let posterURL = URL(string: movie.image.url) {
                            URLSession.shared.dataTask(with: posterURL) { data, response, error in
                                if let data = data {
                                    let image = UIImage(data: data)

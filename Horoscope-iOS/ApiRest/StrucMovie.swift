@@ -65,3 +65,67 @@ struct HoroscopeData: Decodable {
         case horoscopeData = "horoscope_data"
     }
 }
+struct HeroResponse: Codable {
+    let response: String
+    let results: [Hero]
+}
+
+struct Hero: Codable {
+    let id: String
+    let name: String
+    let powerstats: Powerstats
+    let biography: Biography
+    let appearance: Appearance
+    let work: Work
+    let connections: Connections
+    let image: Image
+}
+
+struct Powerstats: Codable {
+    let intelligence, strength, speed, durability, power, combat: String
+}
+
+struct Biography: Codable {
+    let fullName, alterEgos: String
+    let aliases: [String]
+    let placeOfBirth, firstAppearance, publisher, alignment: String
+
+    enum CodingKeys: String, CodingKey {
+        case fullName = "full-name"
+        case alterEgos = "alter-egos"
+        case aliases
+        case placeOfBirth = "place-of-birth"
+        case firstAppearance = "first-appearance"
+        case publisher, alignment
+    }
+}
+
+struct Appearance: Codable {
+    let gender, race: String
+    let height, weight: [String]
+    let eyeColor, hairColor: String
+
+    enum CodingKeys: String, CodingKey {
+        case gender, race, height, weight
+        case eyeColor = "eye-color"
+        case hairColor = "hair-color"
+    }
+}
+
+struct Work: Codable {
+    let occupation, base: String
+}
+
+struct Connections: Codable {
+    let groupAffiliation, relatives: String
+
+    enum CodingKeys: String, CodingKey {
+        case groupAffiliation = "group-affiliation"
+        case relatives
+    }
+}
+
+struct Image: Codable {
+    let url: String
+}
+

@@ -9,19 +9,20 @@ import Foundation
 import UIKit
 
 
-class ViewUI: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewUI: UIViewController, UITableViewDataSource, UITableViewDelegate, ViewControllerSecondDelegate {
     
     @IBOutlet weak var tableView: UITableView!
         
     @IBOutlet weak var textMovie: UITextField!
     var movies: [Movie] = []
+    var favoriteMovies: [String] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
-        
+        loadFavoriteMovies()
     }
         
     let apiKey = "5a61c33"
@@ -58,6 +59,16 @@ class ViewUI: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         task.resume()
     }
+    
+    func loadFavoriteMovies() {
+            if let favorites = UserDefaults.standard.stringArray(forKey: "FavoriteMovies") {
+                favoriteMovies = favorites
+            }
+        }
+    
+    func saveFavoriteMovies() {
+            UserDefaults.standard.set(favoriteMovies, forKey: "FavoriteMovies")
+        }
         
     // MARK: - UITableViewDataSource
     
@@ -70,16 +81,28 @@ class ViewUI: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let movie = movies[indexPath.row]
         
         cell.titleLabel.text = movie.Title
-        cell.year.text=movie.Year
+        cell.year.text = movie.Year
+        
+        // Verifica si la película actual está en la lista de películas favoritas
+        let isFavorite = favoriteMovies.contains(movie.imdbID)
+            cell.configureFavoriteButton(isFavorite: isFavorite)
+            
+            cell.favoriteButtonAction = { [weak self] in
+                guard let self = self else { return }
+                if let index = self.favoriteMovies.firstIndex(of: movie.imdbID) {
+                    self.favoriteMovies.remove(at: index)
+                } else {
+                    self.favoriteMovies.append(movie.imdbID)
+                }
+                self.saveFavoriteMovies()
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
         
         // Cargar la imagen desde la URL
         if let posterURL = URL(string: movie.Poster) {
             URLSession.shared.dataTask(with: posterURL) { data, response, error in
                 if let data = data {
-                    // Convertir los datos en una imagen
                     let image = UIImage(data: data)
-                    
-                    // Actualizar la vista de imagen en el hilo principal
                     DispatchQueue.main.async {
                         cell.posterImageView.image = image
                     }
@@ -88,6 +111,11 @@ class ViewUI: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         
         return cell
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
     }
         
     // MARK: - UITableViewDelegate
@@ -102,7 +130,10 @@ class ViewUI: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         // Pasar el ID de la película seleccionada a la pantalla de detalle
         viewControllerSecond.selectedMovieID = selectedMovie.imdbID
-        
+        viewControllerSecond.isFavorite = favoriteMovies.contains(selectedMovie.imdbID)
+        viewControllerSecond.favoriteMovies = favoriteMovies
+        viewControllerSecond.delegate = self  // Configurar el delegado
+       
         // Presentar la pantalla de detalle
         navigationController?.pushViewController(viewControllerSecond, animated: true)
     }
@@ -111,11 +142,25 @@ class ViewUI: UIViewController, UITableViewDataSource, UITableViewDelegate {
         return 168
     }
     
+    func didUpdateFavoriteStatus(for movieID: String, isFavorite: Bool) {
+            if isFavorite {
+                if !favoriteMovies.contains(movieID) {
+                    favoriteMovies.append(movieID)
+                }
+            } else {
+                favoriteMovies.removeAll { $0 == movieID }
+            }
+            saveFavoriteMovies()
+            tableView.reloadData()
+        }
+    
     @IBAction func seachButton(_ sender: Any) {
         
-        var searchMovie:String? = textMovie.text
+        let searchMovie:String? = textMovie.text
         
         fetchMovies(search: searchMovie!)
+        
+        print(favoriteMovies)
     }
     
     
@@ -125,5 +170,23 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var year: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    
+    func configureFavoriteButton(isFavorite: Bool) {
+            let symbolName = isFavorite ? "heart.fill" : "heart"
+            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20)
+            let symbolImage = UIImage(systemName: symbolName, withConfiguration: symbolConfig)
+            favoriteButton.setImage(symbolImage, for: .normal)
+        }
+    
+    
+    var favoriteButtonAction: (() -> Void)?
+        
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
+            favoriteButtonAction?()
+    }
+    
     // Agrega más outlets según sea necesario
+    
 }

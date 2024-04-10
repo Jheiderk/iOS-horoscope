@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C981C212BC6782700B891B2 /* ViewSuperHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C981C202BC6782700B891B2 /* ViewSuperHero.swift */; };
+		6C981C272BC6884A00B891B2 /* SuperHeroDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C981C262BC6884A00B891B2 /* SuperHeroDetails.swift */; };
 		6CB20AA52BC4011300832530 /* ViewHoroscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB20AA42BC4011300832530 /* ViewHoroscope.swift */; };
 		6CB20AA72BC4048100832530 /* ViewHoroscopeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB20AA62BC4048100832530 /* ViewHoroscopeDetails.swift */; };
 		6CB669A72BC5324900F56AF7 /* HoroscopeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB669A62BC5324900F56AF7 /* HoroscopeProvider.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C981C202BC6782700B891B2 /* ViewSuperHero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSuperHero.swift; sourceTree = "<group>"; };
+		6C981C262BC6884A00B891B2 /* SuperHeroDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroDetails.swift; sourceTree = "<group>"; };
 		6CB20AA42BC4011300832530 /* ViewHoroscope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHoroscope.swift; sourceTree = "<group>"; };
 		6CB20AA62BC4048100832530 /* ViewHoroscopeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHoroscopeDetails.swift; sourceTree = "<group>"; };
 		6CB669A62BC5324900F56AF7 /* HoroscopeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoroscopeProvider.swift; sourceTree = "<group>"; };
@@ -49,6 +53,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C981C222BC67F9A00B891B2 /* ImcCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6A9AB2BC00A820006D8B5 /* ViewController.swift */,
+			);
+			path = ImcCalculator;
+			sourceTree = "<group>";
+		};
+		6C981C232BC67FC900B891B2 /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6A9B02BC010190006D8B5 /* ViewUI.swift */,
+				6CB6A9AC2BC00A820006D8B5 /* ViewControllerSecond.swift */,
+			);
+			path = Movie;
+			sourceTree = "<group>";
+		};
+		6C981C242BC67FD700B891B2 /* Horoscope */ = {
+			isa = PBXGroup;
+			children = (
+				6CB20AA42BC4011300832530 /* ViewHoroscope.swift */,
+				6CB20AA62BC4048100832530 /* ViewHoroscopeDetails.swift */,
+			);
+			path = Horoscope;
+			sourceTree = "<group>";
+		};
+		6C981C252BC67FE000B891B2 /* SuperHero */ = {
+			isa = PBXGroup;
+			children = (
+				6C981C202BC6782700B891B2 /* ViewSuperHero.swift */,
+				6C981C262BC6884A00B891B2 /* SuperHeroDetails.swift */,
+			);
+			path = SuperHero;
+			sourceTree = "<group>";
+		};
 		6CB669A52BC5322100F56AF7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,11 +107,10 @@
 		6CB6A9AD2BC00A820006D8B5 /* ViewMain */ = {
 			isa = PBXGroup;
 			children = (
-				6CB6A9AB2BC00A820006D8B5 /* ViewController.swift */,
-				6CB6A9AC2BC00A820006D8B5 /* ViewControllerSecond.swift */,
-				6CB6A9B02BC010190006D8B5 /* ViewUI.swift */,
-				6CB20AA42BC4011300832530 /* ViewHoroscope.swift */,
-				6CB20AA62BC4048100832530 /* ViewHoroscopeDetails.swift */,
+				6C981C252BC67FE000B891B2 /* SuperHero */,
+				6C981C242BC67FD700B891B2 /* Horoscope */,
+				6C981C232BC67FC900B891B2 /* Movie */,
+				6C981C222BC67F9A00B891B2 /* ImcCalculator */,
 			);
 			path = ViewMain;
 			sourceTree = "<group>";
@@ -182,12 +220,14 @@
 			files = (
 				6CB20AA72BC4048100832530 /* ViewHoroscopeDetails.swift in Sources */,
 				6CB6A9AA2BC00A640006D8B5 /* StrucMovie.swift in Sources */,
+				6C981C272BC6884A00B891B2 /* SuperHeroDetails.swift in Sources */,
 				6CB20AA52BC4011300832530 /* ViewHoroscope.swift in Sources */,
 				6CB852402BBD65EA003EF47F /* AppDelegate.swift in Sources */,
 				6CB6A9AE2BC00A820006D8B5 /* ViewController.swift in Sources */,
 				6CB6A9AF2BC00A820006D8B5 /* ViewControllerSecond.swift in Sources */,
 				6CB669A72BC5324900F56AF7 /* HoroscopeProvider.swift in Sources */,
 				6CB6A9B12BC010190006D8B5 /* ViewUI.swift in Sources */,
+				6C981C212BC6782700B891B2 /* ViewSuperHero.swift in Sources */,
 				6CB852422BBD65EA003EF47F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
