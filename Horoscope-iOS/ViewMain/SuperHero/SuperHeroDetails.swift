@@ -12,6 +12,12 @@ class SuperHeroDetails: UIViewController {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var posterImageView: UIImageView!
+    @IBOutlet var IntelligenceBar: UIProgressView!
+    @IBOutlet var Strenght: UIProgressView!
+    @IBOutlet var Speed: UIProgressView!
+    @IBOutlet var Power: UIProgressView!
+    @IBOutlet var Combat: UIProgressView!
+    
     var hero: String?
     
     override func viewDidLoad() {
@@ -44,12 +50,19 @@ class SuperHeroDetails: UIViewController {
                    
                    DispatchQueue.main.async {
                        self.titleLabel.text = movie.name
+                       self.IntelligenceBar.progress=Float(movie.powerstats.intelligence) ?? 0
+                       self.Strenght.progress=Float(movie.powerstats.strength) ?? 0
+                       self.Speed.progress=Float(movie.powerstats.speed) ?? 0
+                       self.Power.progress=Float(movie.powerstats.power) ?? 0
+                       self.Combat.progress=Float(movie.powerstats.combat) ?? 0
+                       
                        if let posterURL = URL(string: movie.image.url) {
                            URLSession.shared.dataTask(with: posterURL) { data, response, error in
                                if let data = data {
                                    let image = UIImage(data: data)
                                    DispatchQueue.main.async {
                                        self.posterImageView.image = image
+                                       
                                    }
                                }
                            }.resume()

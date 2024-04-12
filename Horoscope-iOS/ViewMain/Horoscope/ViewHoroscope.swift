@@ -48,10 +48,10 @@ class ViewHoroscope: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         
         // Pasar el horóscopo seleccionado a la pantalla de detalle
-        viewHoroscopeDetails.selectedHoroscope = selectedHoroscope
+        viewHoroscopeDetails.selectedHoroscope = selectedHoroscope.id
         
         // Presentar la pantalla de detalle
-        present(viewHoroscopeDetails, animated: true, completion: nil)
+        navigationController?.pushViewController(viewHoroscopeDetails, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

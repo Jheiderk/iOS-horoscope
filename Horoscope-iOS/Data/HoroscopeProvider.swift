@@ -39,6 +39,11 @@ class Horoscope {
     static func allHoroscopes() -> [Horoscope] {
             return [.aries, .aquarius, .pisces, .taurus, .gemini, .cancer, .leo, .virgo, .libra, .scorpio, .sagittarius, .capricorn]
         }
-    
-    
-}
+    static subscript(index: Int) -> Horoscope {
+            return allHoroscopes()[index]
+        }
+        
+        static func getHoroscope(id: String) -> Horoscope? {
+            return allHoroscopes().first { $0.id == id }
+        }
+    }

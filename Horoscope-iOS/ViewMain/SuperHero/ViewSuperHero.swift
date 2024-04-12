@@ -12,7 +12,9 @@ import UIKit
 class ViewSuperHero: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-        
+    @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var nothingFound: UILabel!
+    
     @IBOutlet weak var textMovie: UITextField!
     var superHero: [Hero] = []
         
@@ -20,22 +22,32 @@ class ViewSuperHero: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        indicator.isHidden = true
+        nothingFound.isHidden=true
         
         
     }
         
  
     func fetchMovies(search: String) {
+        
+        superHero.removeAll()
+            tableView.reloadData()
         let urlString = "https://superheroapi.com/api/7252591128153666/search/\(search)"
             
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
         }
+        
+        indicator.startAnimating()
+        indicator.isHidden = false
+        nothingFound.isHidden = true
             
         let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             guard let self = self else { return }
             if let error = error {
+                
                 print("Error fetching movies:", error)
                 return
             }
@@ -49,10 +61,18 @@ class ViewSuperHero: UIViewController, UITableViewDataSource, UITableViewDelegat
                 let decoded = try JSONDecoder().decode(HeroResponse.self, from: data)
                 self.superHero = decoded.results
                 DispatchQueue.main.async {
+                    self.indicator.stopAnimating()
+                    self.indicator.isHidden = true
                     self.tableView.reloadData()
                 }
             } catch {
                 print("Error decoding JSON:", error)
+                
+                DispatchQueue.main.async {
+                                self.indicator.stopAnimating()
+                                self.indicator.isHidden = true
+                                self.nothingFound.isHidden = false
+                            }
             }
         }
         task.resume()

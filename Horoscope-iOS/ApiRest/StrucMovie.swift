@@ -83,6 +83,8 @@ struct Hero: Codable {
 
 struct Powerstats: Codable {
     let intelligence, strength, speed, durability, power, combat: String
+    
+
 }
 
 struct Biography: Codable {
